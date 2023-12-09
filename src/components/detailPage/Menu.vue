@@ -53,7 +53,7 @@ export default {
             if (this.currentDayIndex > 0) {
                 this.currentDayIndex--;
                 this.decrementDate();
-                var menuAPI = 'http://127.0.0.1:8000/menus/' + this.$route.params.id + '/'+ this.formatDateForAPI(this.currentDate);
+                var menuAPI = 'https://mupko.pythonanywhere.com/menus/' + this.$route.params.id + '/'+ this.formatDateForAPI(this.currentDate);
                 axios.get(menuAPI, {headers: {'Content-Type': 'application/json'}}).then((response) => {
                     this.$emit('update-menu', response.data);
                 })
@@ -63,7 +63,7 @@ export default {
             if (this.currentDayIndex < this.days.length - 1) {
                 this.currentDayIndex++;
                 this.incrementDate();
-                axios.get('http://127.0.0.1:8000/menus/' + this.$route.params.id + '/' + this.formatDateForAPI(this.currentDate), {headers: {'Content-Type': 'application/json'}}).then((response) => {
+                axios.get('https://mupko.pythonanywhere.com/menus/' + this.$route.params.id + '/' + this.formatDateForAPI(this.currentDate), {headers: {'Content-Type': 'application/json'}}).then((response) => {
                     this.$emit('update-menu', response.data);
                 })
             }

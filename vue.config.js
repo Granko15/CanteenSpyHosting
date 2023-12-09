@@ -4,7 +4,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8000',  // Replace with your Django server URL
+        target: 'https://mupko.pythonanywhere.com',  // Replace with your Django server URL
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',

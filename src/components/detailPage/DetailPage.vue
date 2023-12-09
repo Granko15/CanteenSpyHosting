@@ -34,12 +34,12 @@ export default {
   ],
   methods: {
     getResponse() {
-      var menuAPI = 'http://127.0.0.1:8000/menus/' + this.$route.params.id + '/' + this.getCurrentDate();
+      var menuAPI = 'https://mupko.pythonanywhere.com/menus/' + this.$route.params.id + '/' + this.getCurrentDate();
       console.log(menuAPI);
       axios.get(menuAPI, {headers: {'Content-Type': 'application/json'}}).then((response) => {
         this.menu = response.data;
       })
-      axios.get('http://127.0.0.1:8000/canteens/' + this.$route.params.id + '/', {headers: {'Content-Type': 'application/json'}}).then((response) => {
+      axios.get('https://mupko.pythonanywhere.com/canteens/' + this.$route.params.id + '/', {headers: {'Content-Type': 'application/json'}}).then((response) => {
         this.openingHours = response.data.hours.split(',');
         this.location = response.data.location;
         this.share = response.data.web;

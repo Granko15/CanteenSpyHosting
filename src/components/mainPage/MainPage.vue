@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     getCanteens() {
-      axios.get('http://127.0.0.1:8000/canteens/', {headers: {'Content-Type': 'application/json'}}).then((response) => {
+      axios.get('https://mupko.pythonanywhere.com/canteens/', {headers: {'Content-Type': 'application/json'}}).then((response) => {
         console.log(response);
       });
     },

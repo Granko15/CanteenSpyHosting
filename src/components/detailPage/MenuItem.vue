@@ -97,7 +97,7 @@ export default {
                             this.buttonReportMissing = this.isButtonDisabled();
                             this.buttonReportAvailable = false;
                         }
-                        axios.put('http://127.0.0.1:8000/menus/available/' + this.id, {headers: {'Content-Type': 'application/json'}}).then((response) => {
+                        axios.put('https://mupko.pythonanywhere.com/menus/available/' + this.id, {headers: {'Content-Type': 'application/json'}}).then((response) => {
                             console.log(response);
                         })
                         this.availableCount++;
@@ -129,7 +129,7 @@ export default {
                         }
                         sessionStorage.removeItem(this.id);
                         console.log("Unavailable", this.id);
-                        axios.put('http://127.0.0.1:8000/menus/unavailable/' + this.id , {headers: {'Content-Type': 'application/json'}}).then((response) => {
+                        axios.put('https://mupko.pythonanywhere.com/menus/unavailable/' + this.id , {headers: {'Content-Type': 'application/json'}}).then((response) => {
                             console.log(response);
                         })
                         this.unavailableCount++;
