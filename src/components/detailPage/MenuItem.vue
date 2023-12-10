@@ -5,7 +5,7 @@
             <p v-else>NEDOSTUPNÉ</p>
         </div>
         <div class="item-info">
-            <RouterLink :to="'/comments/'+id">
+            <RouterLink :to="'/comments/' + canteen_id + '/' + id">
                 <p v-if="meat" class="item-name">{{ name }} 🍗</p>
                 <p v-else-if="vegetarian" class="item-name">{{ name }} 🌱</p>
                 <div class="item-price-rating">
@@ -66,6 +66,7 @@ export default {
         'meat',
         'vegetarian',
         'menu_date',
+        'canteen_id'
     ],
     components: {
         StarRating
@@ -91,7 +92,6 @@ export default {
                         text: "Vaše hlásenie bolo úspešne zaznamenané. Ďakujeme!",
                         icon: "success"
                         });
-                        console.log("Available", this.id);
                         sessionStorage.setItem(this.id, true);
                         if(this.isButtonDisabled()){
                             this.buttonReportMissing = this.isButtonDisabled();
@@ -128,7 +128,6 @@ export default {
                             this.buttonReportAvailable = this.isButtonDisabled();
                         }
                         sessionStorage.removeItem(this.id);
-                        console.log("Unavailable", this.id);
                         axios.put('https://mupko.pythonanywhere.com/menus/unavailable/' + this.id , {headers: {'Content-Type': 'application/json'}}).then((response) => {
                             console.log(response);
                         })
@@ -138,7 +137,6 @@ export default {
         },
         compareDate(){
             const currentDate = this.formatDateForAPI(new Date());
-            console.log(currentDate, this.menu_date);
             return this.menu_date == currentDate;
         },
         formatDateForAPI(date) {

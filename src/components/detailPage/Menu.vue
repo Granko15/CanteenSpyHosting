@@ -4,18 +4,26 @@
             <img class="nav-arrow" src="../../assets/images/left_arrow.svg" alt="Previous Day" @click="previousDay" :disabled="currentDayIndex === 0" >
 
             <div class="menu-date">
-                <h3>{{ currentDay }}</h3>
+                <h3>{{ this.currentDay() }}</h3>
                 <p>{{ this.formatDate(currentDate) }}</p>
             </div>
 
             <img class="nav-arrow" src="../../assets/images/right_arrow.svg" alt="Previous Day" @click="nextDay" :disabled="currentDayIndex === days.length - 1">
         </div>
         <div class="menu-items">
-                <MenuItem v-for="item in this.menu" 
-                v-bind:key="item.id" :id="item.id" :name="item.name" :price="item.price"
-                :menu_date="item.day" :meat="item.meat" :vegetarian="item.vegetarian"
-                :available="item.available" :unavailable="item.unavailable"
-                />
+                <MenuItem 
+                v-for="item in this.menu" 
+                v-bind:key="item.id" 
+                :id="item.id" 
+                :name="item.name" 
+                :price="item.price"
+                :menu_date="item.day" 
+                :meat="item.meat" 
+                :vegetarian="item.vegetarian"
+                :available="item.available" 
+                :unavailable="item.unavailable"
+                :canteen_id="canteen_id"
+                ></MenuItem>
         </div>
     </div>
 
@@ -32,6 +40,7 @@ export default {
     },
     props: [
         'menu',
+        'canteen_id'
     ],
     data() {
         return {
@@ -39,11 +48,6 @@ export default {
             currentDayIndex: new Date().getDay()-1,
             currentDate: this.getCurrentDate(),
         };
-    },
-    computed: {
-        currentDay() {
-            return this.days[this.currentDayIndex];
-        }
     },
     methods: {
         getMenuItemsByDay(day) {
@@ -89,6 +93,12 @@ export default {
         },
         decrementDate() {
             this.currentDate.setDate(this.currentDate.getDate() - 1);
+        },
+        currentDay() {
+            if (this.currentDayIndex === -1) {
+                this.currentDayIndex = 6;
+            }
+            return this.days[this.currentDayIndex];
         }
     }
 };

@@ -18,7 +18,7 @@ const router = createRouter({
             component: DetailPage
         },
         {
-            path: '/comments/:id',
+            path: '/comments/:canteen_id/:menu_id',
             name: 'Comments',
             component: CommentPage
         }
